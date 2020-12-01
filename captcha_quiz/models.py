@@ -52,9 +52,10 @@ class Constants(BaseConstants):
         "D4TSH",
         "3M56R",
         "HAPK3",
+        "HJ9PV"
     ]
 
-    num_rounds = len(reference_texts)
+    num_rounds = 1 #len(reference_texts)
 
     allowed_error_rates = [0, 0.03]
 

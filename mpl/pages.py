@@ -29,7 +29,7 @@ class Instructions(Page):
     # ----------------------------------------------------------------------------------------------------------------
     def vars_for_template(self):
         return {
-            'num_choices':  len(self.participant.vars['mpl_choices'])
+            'num_choices': len(self.participant.vars['mpl_choices'])
         }
 
 
@@ -37,7 +37,6 @@ class Instructions(Page):
 # *** PAGE DECISION *** #
 # ******************************************************************************************************************** #
 class Decision(Page):
-
     # form model
     # ----------------------------------------------------------------------------------------------------------------
     form_model = 'player'
@@ -67,14 +66,14 @@ class Decision(Page):
 
         if Constants.one_choice_per_page:
             return {
-                'page':      page,
-                'total':     total,
-                'progress':  progress,
-                'choices':   [self.player.participant.vars['mpl_choices'][page - 1]]
+                'page': page,
+                'total': total,
+                'progress': progress,
+                'choices': [self.player.participant.vars['mpl_choices'][page - 1]]
             }
         else:
             return {
-                'choices':   self.player.participant.vars['mpl_choices']
+                'choices': self.player.participant.vars['mpl_choices']
             }
 
     # set player's payoff
@@ -127,6 +126,13 @@ class Decision(Page):
 # ******************************************************************************************************************** #
 # *** PAGE RESULTS *** #
 # ******************************************************************************************************************** #
+class Spinner1(Page):
+    pass
+
+
+# ******************************************************************************************************************** #
+# *** PAGE RESULTS *** #
+# ******************************************************************************************************************** #
 class Results(Page):
 
     # skip results until last page
@@ -152,22 +158,22 @@ class Results(Page):
 
         if Constants.one_choice_per_page:
             return {
-                'choice_to_pay':  [choice_to_pay],
-                'option_to_pay':  self.player.in_round(round_to_pay).option_to_pay,
-                'payoff':         self.player.in_round(round_to_pay).payoff,
+                'choice_to_pay': [choice_to_pay],
+                'option_to_pay': self.player.in_round(round_to_pay).option_to_pay,
+                'payoff': self.player.in_round(round_to_pay).payoff,
             }
         else:
             return {
-                'choice_to_pay':  [choice_to_pay],
-                'option_to_pay':  self.player.option_to_pay,
-                'payoff':         self.player.payoff
+                'choice_to_pay': [choice_to_pay],
+                'option_to_pay': self.player.option_to_pay,
+                'payoff': self.player.payoff
             }
 
 
 # ******************************************************************************************************************** #
 # *** PAGE SEQUENCE *** #
 # ******************************************************************************************************************** #
-page_sequence = [Decision]
+page_sequence = [Decision, Spinner1, Results]
 
 if Constants.instructions:
     page_sequence.insert(0, Instructions)
